@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     menu: {
         borderRadius: '1vh', border: '1px solid rgba(0, 0, 0, 0.54)', fontSize: '1.6vh',
         textAlign: 'center', mt: '2vh', minWidth: '15vh',
-        backgroundColor: 'white',
+        backgroundColor: 'white', cursor: 'pointer'
     },
 });
 

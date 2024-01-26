@@ -232,7 +232,10 @@ export default function Coupons() {
                     </Box>
                     <Box sx={{ width: '100%' }}>
                         <input
-                            onChange={(e) => { setSelectedCoupon({ ...selectedCoupon, to: e.target.value }) }}
+                            onChange={(e) => {
+
+                                setSelectedCoupon({ ...selectedCoupon, to: e.target.value })
+                            }}
                             type='date' id="couponEnd" value={selectedCoupon.to ? new Date(selectedCoupon.to).toISOString().split("T")[0] : ""} class='couponTextField' placeholder='To' />
                         <Box class='couponTextFieldsub' sx={{ fontSize: '1.6vh', color: 'rgba(0, 0, 0, 0.54)', mt: '0.5vh' }}>
                             Ends from the date of

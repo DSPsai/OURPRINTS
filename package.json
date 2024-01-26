@@ -1,0 +1,62 @@
+{
+  "name": "our_prints_web",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.9.5",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.46",
+    "@reduxjs/toolkit": "^1.2.5",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "async": "^3.2.0",
+    "axios": "^1.6.2",
+    "copy-to-clipboard": "^3.3.1",
+    "export-from-json": "^1.7.3",
+    "formik": "^2.1.4",
+    "formik-material-ui": "^2.0.0-beta.1",
+    "loadash": "^1.0.0",
+    "material-table": "^1.57.2",
+    "moment": "^2.24.0",
+    "notistack": "^0.9.9",
+    "pluralize": "^8.0.0",
+    "qrcode.react": "^1.0.0",
+    "react": "^16.13.0",
+    "react-csv": "^2.0.3",
+    "react-dom": "^16.13.0",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^5.0.1",
+    "react-toastify": "^8.0.0",
+    "recharts": "^2.10.3",
+    "redux": "^4.0.5",
+    "sass": "^1.66.1",
+    "sass-loader": "^10.1.0",
+    "scss": "^0.2.4",
+    "vertical-timeline-component-for-react": "^1.0.6",
+    "yup": "^0.28.5"
+  },
+  "scripts": {
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start --openssl-legacy-provider",
+    "deploy": "set NODE_OPTIONS=--openssl-legacy-provider && set \"GENERATE_SOURCEMAP=false\" && npm run build --openssl-legacy-provider && firebase deploy --only hosting",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

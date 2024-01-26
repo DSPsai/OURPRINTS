@@ -1,0 +1,14 @@
+Filters in dashboard screen   -> Backend_Error
+Fixed -- No of columns per page but be displayed (Flexible number of rows?) -> 18/12/23  
+CSV extraction of users (New Implementation) -> 23/12/23
+Use phonenumber as UID (Reconfirmation -> Implementation already exists)
+revamp order overview screen(Single Order Page) (Design Complexity -> sets deadline)
+Upon clicking back go to the start of the page. (Reconfirmation -> Cant understand)
+replace assigning icon to next page of order overview (Changing Icon?) -> 24/12/23
+quantity info in file name while downloading(Cant find download button) -> 25/12/23
+show download orders overview receipt button (Download the overview page as pdf) -> 26/12/23
+remove subscription section (Cant find)
+No of pages (no of pages column should work) -> 28/12/23
+Staff People Deletion (Needs to be backend Implementation (Store the deleted users data in another table of as a user))
+Badge Indication (Clarification -> Elaborated overview )
+Payment pending tab (New Implementation ->need Icon & Text for menu option) -> 2/1/24

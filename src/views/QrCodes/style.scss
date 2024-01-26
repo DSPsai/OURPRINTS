@@ -1,0 +1,66 @@
+@import 'views/CommonStyles/tableStyle.scss';
+@import 'views/CommonStyles/container.scss';
+
+.generate-qr-dialog {
+    /* height: 400px; */
+    width: 600px;
+    padding: 15px;
+    .qr-validity, .qr-value, .company-name, .redirection-url, .redirection-img {
+        display: block !important;
+        height: 40px;
+        width: 223px;
+        margin-bottom: 15px !important;
+    }
+    .redirection-type {
+        margin-top: 20px;
+        height: 35px;
+    }
+    .submit {
+        float: right;
+    }
+    .redirection-img-wrapper {
+        margin-top: 20px;
+        .upload-redirect-img {
+            &:hover {
+                cursor: pointer;
+                border-bottom: 1px solid #388e3c;
+            }
+        }
+        .upload-file-input {
+            opacity: 0;
+            pointer-events: none;
+            width: 1px;
+            height: 1px;
+        }
+        .uploaded-img {
+            max-width: 150px;
+            max-height: 150px;
+        }
+        .delete-img {
+            cursor: pointer;
+        }
+    }
+}
+
+.download-qrcode {
+    display: flex !important;
+    justify-content: center;
+    &:hover {
+        cursor: pointer;
+        color: #388e3c;
+    }
+}
+
+.qr-code-dialog {
+    padding: 30px;
+}
+
+.filters {
+    .active-status {
+        margin-top: 15px;
+        padding: 10px;
+        .mutli-select {
+            width: 100%;
+        }
+    }
+}

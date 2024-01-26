@@ -1,0 +1,60 @@
+@import 'views/CommonStyles/tableStyle.scss';
+@import 'views/CommonStyles/container.scss';
+
+.content {
+    padding: 45px 0 0 45px;
+    .content-title {
+        font-size: 25px;
+        margin-bottom: 20px;
+    }
+    .client-img-txt {
+        margin-bottom: 20px;
+        color: rgba(0, 0, 0, 0.54);
+        font-size: 1rem;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        font-weight: 400;
+        letter-spacing: 0.00938em;
+    }
+    .client-image-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 120px;
+        background-color: #FAFAFA;
+        border-radius: 5px;
+        .upload-img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+            padding: 12px;
+            border-radius: 5px;
+            &:hover {
+                background-color: #7BA984;
+                color: #fff;
+            }
+            .upload-file-input {
+                opacity: 0;
+                pointer-events: none;
+                width: 1px;
+                height: 1px;
+            }
+        }
+        .uploaded-img {
+            max-width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+        .delete-img {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            cursor: pointer;
+        }
+    }
+}

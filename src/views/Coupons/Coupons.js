@@ -22,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
     overflow: 'hidden',
 }));
 export default function Coupons() {
-    const [selectedCoupon, setSelectedCoupon] = useState({})
+    const [selectedCoupon, setSelectedCoupon] = useState({ isonetime: "false", isfornew: "false" })
     const [coupons, setCoupons] = useState([]
         //     [
         //     {
@@ -119,7 +119,9 @@ export default function Coupons() {
                         from: from,
                         to: to,
                         isonetime: i.one_time_only ? 'true' : 'false',
-                        id: i.id
+                        id: i.id,
+                        usage_count: i.usage_count,
+                        isfornew: i.isfornew ? 'true' : 'false'
                     })
                 }
             setCoupons([...temp])
@@ -148,6 +150,7 @@ export default function Coupons() {
         const start = document.getElementById('couponStart')
         const end = document.getElementById('couponEnd')
         const disc = document.getElementById('couponDisc')
+        const couponForNew = document.getElementById('couponForNew')
 
         if (name.value.length == 0 || desc.value.length == 0 || start.value.length == 0 || end.value.length == 0 || disc.value.length == 0) {
             alert("Please enter the values correctly")
@@ -158,10 +161,11 @@ export default function Coupons() {
                 start: start,
                 end: end,
                 disc: disc,
-                isOneTime: document.getElementById('couponOneTime').value,
+                isOneTime: selectedCoupon.isonetime === "true",
                 isNew: isSelected == null,
-                id: isSelected != null && selectedCoupon.id
-            }).then(res => getCouponsAll())
+                id: isSelected != null && selectedCoupon.id,
+                isfornew: selectedCoupon.isfornew === "true",
+            }).then(res => getCouponsAll()).catch(er => console.log(er))
         }
     }
     return (
@@ -193,19 +197,25 @@ export default function Coupons() {
                 backgroundColor: 'white', display: 'flex', flexFlow: 'column', gap: '2vh'
             }}>
                 <Box>
-                    <input id="couponName" class='couponTextField' defaultValue={selectedCoupon.name || ""} placeholder='Name Of Coupon' />
+                    <input
+                        onChange={(e) => { setSelectedCoupon({ ...selectedCoupon, name: e.target.value }) }}
+                        id="couponName" class='couponTextField' value={selectedCoupon.name || ""} placeholder='Name Of Coupon' />
                     <Box class='couponTextFieldsub' sx={{ fontSize: '1.6vh', color: 'rgba(0, 0, 0, 0.54)', mt: '0.5vh' }}>
                         Name a coupon ( this wont reflect on user side )
                     </Box>
                 </Box>
                 <Box>
-                    <input id="couponDesc" class='couponTextField' defaultValue={selectedCoupon.discription || ""} placeholder='Coupon Code' />
+                    <input
+                        onChange={(e) => { setSelectedCoupon({ ...selectedCoupon, discription: e.target.value }) }}
+                        id="couponDesc" class='couponTextField' value={selectedCoupon.discription || ""} placeholder='Coupon Code' />
                     <Box class='couponTextFieldsub' sx={{ fontSize: '1.6vh', color: 'rgba(0, 0, 0, 0.54)', mt: '0.5vh' }}>
                         Make sure every word is CAPITAL and it is used as reference
                     </Box>
                 </Box>
                 <Box>
-                    <input id="couponDisc" class='couponTextField' defaultValue={selectedCoupon.percentage || ""} placeholder='Discount %' />
+                    <input
+                        onChange={(e) => { setSelectedCoupon({ ...selectedCoupon, percentage: e.target.value }) }}
+                        id="couponDisc" class='couponTextField' value={selectedCoupon.percentage || ""} placeholder='Discount %' />
                     <Box class='couponTextFieldsub' sx={{ fontSize: '1.6vh', color: 'rgba(0, 0, 0, 0.54)', mt: '0.5vh' }}>
                         Discount percentage is applied on total order value
                     </Box>
@@ -213,13 +223,17 @@ export default function Coupons() {
                 <Box sx={{ color: 'black', fontSize: '1.7vh', mb: '-0.5vh' }}>Validity</Box>
                 <Box sx={{ width: '100%', display: 'flex', gap: '2vh' }}>
                     <Box sx={{ width: '100%' }}>
-                        <input type='date' id="couponStart" defaultValue={selectedCoupon.from ? new Date(selectedCoupon.from).toISOString().split("T")[0] : ""} class='couponTextField' placeholder='From' />
+                        <input
+                            onChange={(e) => { setSelectedCoupon({ ...selectedCoupon, from: e.target.value }) }}
+                            type='date' id="couponStart" value={selectedCoupon.from ? new Date(selectedCoupon.from).toISOString().split("T")[0] : ""} class='couponTextField' placeholder='From' />
                         <Box class='couponTextFieldsub' sx={{ fontSize: '1.6vh', color: 'rgba(0, 0, 0, 0.54)', mt: '0.5vh' }}>
                             Starts from the date of
                         </Box>
                     </Box>
                     <Box sx={{ width: '100%' }}>
-                        <input type='date' id="couponEnd" defaultValue={selectedCoupon.to ? new Date(selectedCoupon.to).toISOString().split("T")[0] : ""} class='couponTextField' placeholder='To' />
+                        <input
+                            onChange={(e) => { setSelectedCoupon({ ...selectedCoupon, to: e.target.value }) }}
+                            type='date' id="couponEnd" value={selectedCoupon.to ? new Date(selectedCoupon.to).toISOString().split("T")[0] : ""} class='couponTextField' placeholder='To' />
                         <Box class='couponTextFieldsub' sx={{ fontSize: '1.6vh', color: 'rgba(0, 0, 0, 0.54)', mt: '0.5vh' }}>
                             Ends from the date of
                         </Box>
@@ -231,9 +245,23 @@ export default function Coupons() {
                         '& > .MuiFormGroup-root': { display: 'flex', flexFlow: 'row' },
                         '& .MuiFormControlLabel-root': { width: '100%' },
                     }}>
-                        <RadioGroup id='couponOneTime' defaultValue={selectedCoupon.isonetime ? selectedCoupon.isonetime : "true"}>
-                            <FormControlLabel value={"true"} control={<Radio />} label="One-time use" />
-                            <FormControlLabel value={"false"} control={<Radio />} label="Multi-time use" />
+                        <RadioGroup
+                            onChange={(e) => { setSelectedCoupon({ ...selectedCoupon, isonetime: e.target.value }) }}
+                            id='couponOneTime' value={selectedCoupon.isonetime}>
+                            <FormControlLabel value="true" control={<Radio />} label="One-time use" />
+                            <FormControlLabel value="false" control={<Radio />} label="Multi-time use" />
+                        </RadioGroup>
+                    </Box>
+                    <Box sx={{
+                        width: '100%',
+                        '& > .MuiFormGroup-root': { display: 'flex', flexFlow: 'row' },
+                        '& .MuiFormControlLabel-root': { width: '100%' },
+                    }}>
+                        <RadioGroup id='couponForNew'
+                            onChange={(e) => { setSelectedCoupon({ ...selectedCoupon, isfornew: e.target.value }) }}
+                            value={selectedCoupon.isfornew}>
+                            <FormControlLabel value={"true"} control={<Radio />} label="Only for New Users" />
+                            <FormControlLabel value={"false"} control={<Radio />} label="For ALL Users" />
                         </RadioGroup>
                     </Box>
                     <Box sx={{ width: '100%', textAlign: 'end', mt: '2vh', display: 'flex', justifyContent: 'space-between' }}>

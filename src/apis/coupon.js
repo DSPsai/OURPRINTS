@@ -11,13 +11,14 @@ export const getCoupons =async () => {
           }
     }).then(response => {
         console.log(response.data)
-        return response.data.results
+        return response.data
     }).catch(err => {
         alert("Error Occured while getting coupons")      
     })
 }
 
 export const createNewCouponAPI=async(dat)=>{
+  console.log(dat)
      return await axios({
           method: dat.isNew?"post":"put",
           url: cfg.baseURL+'/coupon_app/api/coupons/'+(dat.isNew?"":(dat.id+"/")),
@@ -27,7 +28,9 @@ export const createNewCouponAPI=async(dat)=>{
             "discount_percentage": dat.disc.value,
             "valid_from": dat.start.value+'T00:00',
             "valid_to": dat.end.value+'T00:00',
-            "one_time_only": dat.isOneTime
+            "one_time_only": dat.isOneTime,
+            isfornew:dat.isfornew,
+            usage_count:0
           },
           headers: {
             'Content-Type': 'application/json',
@@ -37,7 +40,7 @@ export const createNewCouponAPI=async(dat)=>{
         alert("Coupon Updated")
       }).catch(err => {
         console.log(err)
-        alert("Error Occured while creating coupon, reason : "+JSON.stringify(err.response.data))          
+        alert("Error Occured while creating coupon ")          
       })
 }
 export const deleteCoupon=async(dat)=>{

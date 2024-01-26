@@ -49,7 +49,12 @@ function TotalOrders(props) {
       title: 'Category of Print',
       filtering: true,
       field: 'order_type',
-      lookup: { 'standard_print': 'Standard', 'freemium': 'Freemium', 'official_documents': 'Official' },
+      lookup: {
+        'standard_print': 'Standard',
+        'freemium': 'Freemium',
+        'official_documents': 'Official',
+        '24hrs-delivery': '24hrs-delivery'
+      },
     },
     { title: 'Number of pages', field: 'pdf_page_count' },
     { title: 'Order price', field: 'amount' },
